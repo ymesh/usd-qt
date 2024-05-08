@@ -290,7 +290,7 @@ class _VecEdit(_LineEdit):
 
         self._validator = self.validatorType()
 
-        for index in xrange(self.valueType.dimension):
+        for index in range(self.valueType.dimension):
             self._editors.append(QtWidgets.QLineEdit(self))
             self._editors[-1].setValidator(self._validator)
             self._layout.addWidget(self._editors[-1])
@@ -305,18 +305,18 @@ class _VecEdit(_LineEdit):
 
     def GetValue(self):
         text = (self._editors[i].text()
-                for i in xrange(self.valueType.dimension))
+                for i in range(self.valueType.dimension))
         return self.valueType(*(self.scalarType(t) if t else 0.0 for t in text))
 
     def SetValue(self, value):
         if value is None:
-            for index in xrange(self.valueType.dimension):
+            for index in range(self.valueType.dimension):
                 self._editors[index].clear()
             return
         if len(value) != self.valueType.dimension:
             raise ValueError("Input length %i does not match expected length "
                              "%i", len(value), self.valueType.dimension)
-        for index in xrange(self.valueType.dimension):
+        for index in range(self.valueType.dimension):
             if value[index] is None:
                 raise ValueError("Value at %i is None", index)
             string = str(value[index])
@@ -354,8 +354,8 @@ class _MatrixEdit(_LineEdit):
         self._editors = []
         self._validator = self.validatorType()
 
-        for row in xrange(self.valueType.dimension[0]):
-            for column in xrange(self.valueType.dimension[1]):
+        for row in range(self.valueType.dimension[0]):
+            for column in range(self.valueType.dimension[1]):
                 self._editors.append(QtWidgets.QLineEdit(self))
                 self._editors[-1].setValidator(self._validator)
                 self._layout.addWidget(self._editors[-1], row, column)
@@ -387,13 +387,13 @@ class _MatrixEdit(_LineEdit):
             raise ValueError(
                 "Input row size %i does not match expected length %i",
                 len(value), numRows)
-        for row in xrange(numRows):
+        for row in range(numRows):
             if type(value) is str:
                 raise TypeError("Row cannot be string")
             if len(value[row]) != numColumns:
                 raise ValueError("Input column size %i does not match expected "
                                  "length %i", len(value[row]), numColumns)
-            for column in xrange(numColumns):
+            for column in range(numColumns):
                 if value[row][column] is None:
                     raise ValueError("Value at (%i, %i) is None", row, column)
                 string = str(value[row][column])

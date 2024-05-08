@@ -25,8 +25,12 @@
 #include <boost/python.hpp>
 #include <boost/python/class.hpp>
 
+#include "pxr/usd/usd/schemaBase.h"
+
 #include "pxr/pxr.h"
+#include "pxr/base/tf/refPtr.h"
 #include "pxr/base/tf/pyPtrHelpers.h"
+
 
 #include "hierarchyCache.h"
 
@@ -34,7 +38,8 @@ using namespace BOOST_NS::python;
 
 PXR_NAMESPACE_USING_DIRECTIVE
 
-TF_REFPTR_CONST_VOLATILE_GET(UsdQt_HierarchyCache::Proxy)
+// TF_REFPTR_CONST_VOLATILE_GET(UsdQt_HierarchyCache::Proxy)
+
 
 void wrapHierarchyCache() {
     {
@@ -59,3 +64,4 @@ void wrapHierarchyCache() {
             .def("GetPrim", &This::Proxy::GetPrim);
     }
 }
+

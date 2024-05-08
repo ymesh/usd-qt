@@ -157,7 +157,8 @@ class OpinionEditor(QtWidgets.QWidget):
         self.ResetColumnSpanned()
 
     def _TraverseAllDescendents(self, index):
-        for i in xrange(self._view.model().rowCount(index)):
+        # for i in xrange(self._view.model().rowCount(index)):
+        for i in range(self._view.model().rowCount(index)):
             childIndex = self._view.model().index(i, 0, index)
             yield childIndex
             for descendent in self._TraverseAllDescendents(childIndex):

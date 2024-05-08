@@ -114,7 +114,7 @@ class ValueDelegate(QtWidgets.QStyledItemDelegate):
         painter.drawRect(left, top, colorWidth, height)
         painter.restore()
 
-        for i in xrange(columns):
+        for i in range(columns):
             cellRect = QtCore.QRect(colorWidth + pad + left + cellWidth * i,
                                     top, cellWidth, height)
             style.drawItemText(painter, cellRect, vecOption.displayAlignment,
@@ -147,7 +147,8 @@ class ValueDelegate(QtWidgets.QStyledItemDelegate):
         columns = vecData.dimension
         cellWidth = width / columns
 
-        for i in xrange(columns):
+        # for i in xrange(columns):
+        for i in range(columns):
             cellRect = QtCore.QRect(left + cellWidth * i, top,
                                     cellWidth, height)
             style.drawItemText(painter, cellRect, vecOption.displayAlignment,
@@ -182,8 +183,8 @@ class ValueDelegate(QtWidgets.QStyledItemDelegate):
         cellWidth = width / columns
         cellHeight = height / rows
 
-        for i in xrange(rows):
-            for j in xrange(columns):
+        for i in range(rows):
+            for j in range(columns):
                 component = matrixData[i][j] or ''
                 cellRect = QtCore.QRect(left + cellWidth * j,
                                         top + cellHeight * i,

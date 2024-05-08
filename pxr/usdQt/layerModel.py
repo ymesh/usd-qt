@@ -151,7 +151,7 @@ if __name__ == '__main__':
     view.setModel(model)
 
     def OnDoubleClicked(modelIndex):
-        print modelIndex.data()
+        print (modelIndex.data())
 
     view.doubleClicked.connect(OnDoubleClicked)
     view.show()

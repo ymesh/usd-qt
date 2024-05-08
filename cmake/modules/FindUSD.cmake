@@ -25,7 +25,7 @@ endif ()
 # leave USD_LIB_PREFIX at it's default (empty string on windows), even if you
 # set a PXR_LIB_PREFIX when building USD core.
 
-set(USD_LIB_PREFIX ${CMAKE_SHARED_LIBRARY_PREFIX}
+set(USD_LIB_PREFIX "${CMAKE_SHARED_LIBRARY_PREFIX}usd_"
     CACHE STRING "Prefix of USD libraries")
 
 find_path(USD_INCLUDE_DIR pxr/pxr.h
@@ -33,6 +33,8 @@ find_path(USD_INCLUDE_DIR pxr/pxr.h
         ${USD_ROOT}/include
         $ENV{USD_ROOT}/include
     DOC "USD Include directory")
+
+message(">>>> USD_LIB_PREFIX = ${USD_LIB_PREFIX}")
 
 # Disabled because this FindUSD doesn't work with pxrConfig.cmake - see note
 # below
@@ -161,6 +163,7 @@ foreach (lib ${USD_LIBS})
     find_library(USD_${lib}_LIBRARY
         NAMES ${USD_LIB_PREFIX}${lib}${USD_LIB_SUFFIX}
         HINTS ${USD_LIBRARY_DIR})
+    # message(USD_${lib}_LIBRARY " -> " ${USD_LIB_PREFIX}${lib}${USD_LIB_SUFFIX})
     if (USD_${lib}_LIBRARY)
         add_library(${lib} INTERFACE IMPORTED)
         set_target_properties(${lib}

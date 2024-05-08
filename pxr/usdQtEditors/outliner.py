@@ -30,7 +30,8 @@ from __future__ import absolute_import
 from collections import namedtuple
 from functools import partial
 
-from ._Qt import QtCore, QtGui, QtWidgets
+# from ._Qt import QtCore, QtGui, QtWidgets
+from _Qt import QtCore, QtGui, QtWidgets
 
 from pxr import Sdf, Tf, Usd
 from pxr.UsdQt.hierarchyModel import HierarchyBaseModel
@@ -600,7 +601,7 @@ class SaveEditLayer(MenuAction):
         """
         editTarget = context.editTargetLayer
         if not editTarget.dirty:
-            print 'Nothing to save'
+            print ('Nothing to save')
             return
         if not self.state.CheckOriginalContents(editTarget):
             return

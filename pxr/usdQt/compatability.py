@@ -39,8 +39,9 @@ if False:
 
 
 QT_VERSION_STR = QtCore.qVersion()
-QT_VERSION_PARTS = map(int, QT_VERSION_STR.split('.'))
+QT_VERSION_PARTS = map(int, QT_VERSION_STR.split("."))
 QT_VERSION_MAJOR, QT_VERSION_MINOR, QT_VERSION_RELEASE = QT_VERSION_PARTS
+print(f"{QT_VERSION_STR = }")
 
 
 def StyledItemDelegateSetEditorData(cls, delegate, editor, index):
@@ -59,8 +60,28 @@ def StyledItemDelegateSetEditorData(cls, delegate, editor, index):
     editor : QtWidgets.QWidget
     index : QtCore.QModelIndex
     """
+    from pprint import pprint
+
+    print("* StyledItemDelegateSetEditorData")
     data = index.data(QtCore.Qt.EditRole)
-    setattr(editor, editor.metaObject().userProperty().name(), data)
+    print(f"{delegate = }")
+    print(f"{data = }")
+    print(f"{editor = }")
+    print(f"{index = }")
+    print(f"{editor.metaObject() = }")
+    print(f"{editor.metaObject().className() = }")
+    print(f"{editor.metaObject().userProperty() = }")
+    pprint(dir(editor.metaObject().userProperty()))
+
+    print(f"{editor.staticMetaObject.className() = }")
+    print(f"{editor.staticMetaObject.userProperty().name() = }")
+
+    print(f"{editor.metaObject().userProperty().name() = }")
+
+    print(f"{editor.metaObject().userProperty().typeName() = }")
+
+    if name := editor.metaObject().userProperty().name():
+        setattr(editor, name, data)
 
 
 def StyledItemDelegateSetModelData(cls, delegate, editor, model, index):
@@ -80,8 +101,15 @@ def StyledItemDelegateSetModelData(cls, delegate, editor, model, index):
     model : QtCore.QAbstractItemModel
     index : QtCore.QModelIndex
     """
-    value = getattr(editor, str(editor.metaObject().userProperty().name()))
-    model.setData(index, value, role=QtCore.Qt.EditRole)
+    print("* StyledItemDelegateSetModelData")
+    print(f"{delegate = }")
+    print(f"{editor = }")
+    print(f"{model = }")
+    print(f"{index = }")
+    print(f"{editor.metaObject().userProperty().name() = }")
+    if name := editor.metaObject().userProperty().name():
+        value = getattr(editor, str(name))
+        model.setData(index, value, role=QtCore.Qt.EditRole)
 
 
 def HeaderViewSetResizeMode(header, mode):

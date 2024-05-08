@@ -33,11 +33,14 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(USD REQUIRED)
 find_package(TBB REQUIRED)
 
-find_package(PythonInterp 2.7 REQUIRED)
-find_package(PythonLibs 2.7 REQUIRED)
+find_package(PythonInterp ${PY_VER} REQUIRED)
+find_package(PythonLibs ${PY_VER} REQUIRED)
 
 set(Boost_USE_STATIC_LIBS OFF)
-find_package(Boost COMPONENTS python27)
+
+string (REPLACE "." "" PYTHON_DOTLESS_VERSION "${PY_VER}")
+
+find_package(Boost COMPONENTS python${PYTHON_DOTLESS_VERSION})
 if (NOT Boost_FOUND)
     find_package(Boost COMPONENTS python REQUIRED)
 endif()

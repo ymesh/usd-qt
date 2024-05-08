@@ -163,7 +163,7 @@ class HierarchyBaseModel(QtCore.QAbstractItemModel):
                         newRow = self._index.GetRow(newProxy)
 
                         if index.row() != newRow:
-                            for i in xrange(self.columnCount(QtCore.QModelIndex())):
+                            for i in range(self.columnCount(QtCore.QModelIndex())):
                                 fromIndices.append(index)
                                 toIndices.append(self.createIndex(
                                     newRow, index.column(), newProxy))
